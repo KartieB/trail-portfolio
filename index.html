@@ -152,15 +152,17 @@ html[data-theme="light"] .hero-dither{opacity:.5}
 .sel .hd{position:absolute;width:9px;height:9px;background:var(--bg);border:1.5px solid var(--blue);pointer-events:none}
 .sel .hd:nth-child(1){left:-5px;top:-5px}.sel .hd:nth-child(2){right:-5px;top:-5px}.sel .hd:nth-child(3){left:-5px;bottom:-5px}.sel .hd:nth-child(4){right:-5px;bottom:-5px}
 .sel-t{transition-property:color;transition-duration:.15s;transition-timing-function:ease-out}
-.ftb{position:absolute;left:50%;bottom:calc(100% + 14px);transform:translate(-50%,4px) scale(.97);transform-origin:50% 100%;display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--card);border:1px solid var(--line-2);border-radius:16px;box-shadow:var(--shadow);opacity:0;pointer-events:none;z-index:5;cursor:default;transition:opacity .16s ease-out,transform .2s cubic-bezier(.2,.8,.2,1)}
+.ftb{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,4px) scale(.97);transform-origin:50% 100%;display:flex;align-items:center;gap:5px;padding:6px 8px;background:var(--card);border:1px solid var(--line-2);border-radius:13px;box-shadow:var(--shadow);opacity:0;pointer-events:none;z-index:5;cursor:default;transition:opacity .16s ease-out,transform .2s cubic-bezier(.2,.8,.2,1)}
 .sel.open .ftb{opacity:1;transform:translate(-50%,0) scale(1);pointer-events:auto}
-.ftb-sw{position:relative;width:26px;height:26px;padding:0;border:0;border-radius:50%;background:var(--c);cursor:pointer;box-shadow:inset 0 -2px 3px rgba(0,0,0,.18);transition:transform .15s ease-out,box-shadow .15s ease-out}
-.ftb-sw::before{content:"";position:absolute;inset:-4px}
+.ftb::after{content:"";position:absolute;left:0;right:0;top:100%;height:12px}
+@media (hover:hover){.sel:hover .ftb{opacity:1;transform:translate(-50%,0) scale(1);pointer-events:auto;transition-delay:.06s}}
+.ftb-sw{position:relative;width:18px;height:18px;padding:0;border:0;border-radius:50%;background:var(--c);cursor:pointer;box-shadow:inset 0 -2px 3px rgba(0,0,0,.18);transition:transform .15s ease-out,box-shadow .15s ease-out}
+.ftb-sw::before{content:"";position:absolute;inset:-3px}
 .ftb-sw:hover{transform:scale(1.08)}
 .ftb-sw:active{transform:scale(.94)}
 .ftb-sw:focus{outline:none}
-.ftb-sw:focus-visible{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--fg)}
-.ftb-sw[aria-checked="true"]{box-shadow:inset 0 -2px 3px rgba(0,0,0,.18),0 0 0 2.5px var(--card),0 0 0 4.5px var(--c)}
+.ftb-sw:focus-visible{box-shadow:0 0 0 2px var(--card),0 0 0 3.5px var(--fg)}
+.ftb-sw[aria-checked="true"]{box-shadow:inset 0 -2px 3px rgba(0,0,0,.18),0 0 0 2px var(--card),0 0 0 3.5px var(--c)}
 html[data-theme="dark"]{--chip:rgba(255,255,255,.08);--chip-h:rgba(255,255,255,.13);--dk-bg:rgba(26,26,28,.6);--dk-line:rgba(255,255,255,.1);--dk-fill:rgba(255,255,255,.1);--dk-shadow:0 14px 34px rgba(0,0,0,.45);--f1:#f5e050;--f2:#22d3ee;--f3:#e879f9}
 html[data-theme="light"]{--chip:rgba(0,0,0,.055);--chip-h:rgba(0,0,0,.09);--dk-bg:rgba(255,255,255,.62);--dk-line:rgba(0,0,0,.08);--dk-fill:rgba(0,0,0,.06);--dk-shadow:0 14px 34px rgba(0,0,0,.12);--f1:#c2410c;--f2:#0e7490;--f3:#a21caf}
 html[data-theme="blueprint"]{--chip:rgba(255,255,255,.12);--chip-h:rgba(255,255,255,.18);--dk-bg:rgba(13,59,140,.6);--dk-line:rgba(255,255,255,.25);--dk-fill:rgba(255,255,255,.14);--dk-shadow:0 14px 34px rgba(0,0,30,.35);--f1:#ffe066;--f2:#7ee8fa;--f3:#ffb3f5}
@@ -1531,7 +1533,9 @@ safe('phrase', () => {
     const shift = r.left < pad ? pad - r.left : r.right > innerWidth - pad ? innerWidth - pad - r.right : 0;
     tb.style.marginLeft = shift + 'px';
   };
-  sel.addEventListener('click', e => { if (e.target.closest('.ftb')) return; setOpen(!sel.classList.contains('open')); });
+  const place = () => { tb.style.marginLeft = '0px'; const r = tb.getBoundingClientRect(), pad = 12; tb.style.marginLeft = (r.left < pad ? pad - r.left : r.right > innerWidth - pad ? innerWidth - pad - r.right : 0) + 'px'; };
+  sel.addEventListener('mouseenter', place);
+  sel.addEventListener('click', e => { if (e.target.closest('.ftb')) return; if (matchMedia('(hover:hover)').matches) return; setOpen(!sel.classList.contains('open')); });
   sel.addEventListener('keydown', e => {
     if (e.target === sel && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); setOpen(!sel.classList.contains('open')); if (sel.classList.contains('open')) btns[cur].focus(); }
     if (e.key === 'Escape') { e.stopPropagation(); setOpen(false); sel.focus(); }
