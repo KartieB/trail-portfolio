@@ -447,6 +447,23 @@ html[data-theme="light"] .bulb-lbl::after{content:"lights off"}
 .tl-thumb{flex:none;width:52px;height:52px;border-radius:10px;background:radial-gradient(120% 90% at 80% 0%,rgba(var(--rgb),.45),transparent 60%),var(--card);border:1px solid var(--line-2);display:grid;place-items:center;color:var(--pc);box-shadow:0 4px 10px rgba(0,0,0,.15)}
 .tl-thumb svg{width:22px;height:22px}
 .tl-pt b{display:block;font-size:14px;font-weight:500}
+.tl-projs{display:flex;flex-direction:column;gap:2px;margin-top:14px;margin-left:-8px}
+.tl-projs .tl-proj{margin-top:0}
+.tl-kind{font-weight:400;color:var(--muted)}
+.tl-badge{display:inline-flex;align-items:center;margin-left:8px;padding:0 7px;height:18px;border-radius:999px;border:1px solid var(--line-2);font-size:9.5px;letter-spacing:.06em;color:var(--muted);vertical-align:1px}
+.tl-badge.ok{color:#15803d;border-color:rgba(22,163,74,.35)}
+html:is([data-theme="dark"],[data-theme="blueprint"]) .tl-badge.ok{color:#4ade80;border-color:rgba(74,222,128,.35)}
+.pbadge{position:absolute;left:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:999px;background:var(--panel);border:1px solid var(--line-2);font-size:10px;color:var(--fg);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);pointer-events:none}
+.pbadge svg{width:11px;height:11px}
+.proj.is-nda .mock-wrap{filter:blur(9px) saturate(.6);opacity:.55}
+.proj.is-nda:hover .mock-wrap{transform:scale(1.02)}
+.nda-card{display:flex;gap:16px;margin:40px 0 8px;padding:22px;border:1px dashed var(--line-2);border-radius:14px;background:var(--bg-2)}
+.nda-ic{flex:none;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--card);border:1px solid var(--line-2);color:var(--fg)}
+.nda-ic svg{width:18px;height:18px}
+.nda-card b{font-weight:500;font-size:16px}
+.nda-card p{color:var(--muted);font-size:15px;line-height:1.6;margin:4px 0 16px}
+.d-note{display:flex;align-items:center;gap:7px;margin-top:16px;font-size:13.5px;color:var(--dim)}
+.d-note svg{width:13px;height:13px;flex:none}
 .tl-pt small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4}
 @media (max-width:760px){.tl-wrap{--gut:44px;--rx:60px}.tl-item{column-gap:40px}}
 @media (prefers-reduced-motion:reduce){.tl-wake{transition:none}}
@@ -890,25 +907,31 @@ html.gear5 .hero::after{content:"GEAR 5";position:absolute;right:0;bottom:30px;f
         <div class="tl-rail" aria-hidden="true"><span class="tl-wake" id="tlWake"></span></div>
         <ol class="tl" aria-label="Experience">
         <li class="tl-item is-current">
-          <div class="tl-when"><small class="mono">10 mo</small><b class="mono">2025</b></div>
+          <div class="tl-when"><small class="mono">10 mo</small><b class="mono">2026</b></div>
           <span class="tl-node" aria-hidden="true"></span>
           <div class="tl-body">
             <span class="tl-logo" style="--lb:#1f2937;--lf:#f5f5f5" aria-hidden="true">F</span>
             <h3>Freelance<span class="tl-cur mono">Current</span></h3>
             <p class="tl-role">Product Designer</p>
-            <p class="tl-desc">Working with startups end to end, from research to handoff, on mobile apps, iOS products and AI agents.</p>
-            <a class="tl-proj" href="#work/agent" data-proj="agent"><span class="tl-thumb" aria-hidden="true"></span><span class="tl-pt"><b></b><small></small></span></a>
+            <p class="tl-desc">Working with startups end to end, from research to handoff, on mobile apps, iOS products and AI products.</p>
+            <div class="tl-projs">
+              <a class="tl-proj" href="#work/openyoureyes" data-proj="openyoureyes"><span class="tl-thumb" aria-hidden="true"></span><span class="tl-pt"><b></b><small></small></span></a>
+              <a class="tl-proj" href="#work/parrotpal" data-proj="parrotpal"><span class="tl-thumb" aria-hidden="true"></span><span class="tl-pt"><b></b><small></small></span></a>
+              <a class="tl-proj" href="#work/bauhow" data-proj="bauhow"><span class="tl-thumb" aria-hidden="true"></span><span class="tl-pt"><b></b><small></small></span></a>
+            </div>
           </div>
         </li>
         <li class="tl-item">
-          <div class="tl-when"><small class="mono">1 yr 3 mo</small><b class="mono">2024</b></div>
+          <div class="tl-when"><small class="mono">1 yr 3 mo</small><b class="mono">2025</b></div>
           <span class="tl-node" aria-hidden="true"></span>
           <div class="tl-body">
             <span class="tl-logo" style="--lb:#f59e0b;--lf:#1d1d1d" aria-hidden="true">B</span>
             <h3>BizBMS Technology</h3>
             <p class="tl-role">Product Designer</p>
             <p class="tl-desc">Designed the core dashboard, everyday workflows and the component library for a B2B business management product.</p>
-            <a class="tl-proj" href="#work/bizbms" data-proj="bizbms"><span class="tl-thumb" aria-hidden="true"></span><span class="tl-pt"><b></b><small></small></span></a>
+            <div class="tl-projs">
+              <a class="tl-proj" href="#work/bizbms" data-proj="bizbms"><span class="tl-thumb" aria-hidden="true"></span><span class="tl-pt"><b></b><small></small></span></a>
+            </div>
           </div>
         </li>
         <li class="tl-item">
@@ -919,7 +942,9 @@ html.gear5 .hero::after{content:"GEAR 5";position:absolute;right:0;bottom:30px;f
             <h3>Arto Creative Studio</h3>
             <p class="tl-role">UI/UX Designer</p>
             <p class="tl-desc">My first design job. Client websites and brand-led interfaces, and a crash course in feedback and pixel care.</p>
-            <a class="tl-proj" href="#work/parrotpal" data-proj="parrotpal"><span class="tl-thumb" aria-hidden="true"></span><span class="tl-pt"><b></b><small></small></span></a>
+            <div class="tl-projs">
+              <a class="tl-proj is-static" href="#contact" style="--pc:#fb7185;--rgb:251,113,133"><span class="tl-thumb" aria-hidden="true" data-icon="lock"></span><span class="tl-pt"><b>Client work<span class="tl-badge mono">NDA</span></b><small>Websites for studio clients. Happy to talk you through them.</small></span></a>
+            </div>
           </div>
         </li>
         <li class="tl-item">
@@ -930,7 +955,6 @@ html.gear5 .hero::after{content:"GEAR 5";position:absolute;right:0;bottom:30px;f
             <h3>Mechanical engineering</h3>
             <p class="tl-role">Where it started</p>
             <p class="tl-desc">Drawings, tolerances and workshops taught me to respect constraints. I still sketch flows like engineering drawings.</p>
-            
           </div>
         </li>
         </ol>
@@ -1184,6 +1208,8 @@ const ICONS = {
   spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg>',
   eye: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
   bird: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 4a5 5 0 0 0-5 5v3c0 4 3 7 7 7h3l-2-3V9a5 5 0 0 0-3-5z"/><path d="M15 7.5l4 .5-3 2"/><circle cx="14" cy="8" r=".8" fill="currentColor"/><path d="M10 14l-6 5"/></svg>',
+  lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="9.5" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  people: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8.5" r="3"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M3.5 19c.6-3 2.8-4.8 5.5-4.8s4.9 1.8 5.5 4.8M14.5 14.6c2.6-.4 5 1.1 5.8 4.4"/></svg>',
   check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
   arrow: '<svg viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M38 6C26 18 12 20 3 14M3 14l7-1M3 14l3-7"/></svg>',
@@ -1293,39 +1319,43 @@ safe('photo', () => { ['#avatarPhoto', '#portraitPhoto'].forEach(id => { const e
 
 /* ---------------- Projects ---------------- */
 const PROJECTS = [
-  { id: 'parrotpal', name: 'ParrotPal', kind: 'Mobile app', pc: '#4ade80', rgb: '74,222,128', icon: 'bird', mock: 'parrot',
-    blurb: 'A speaking-practice buddy that listens, repeats and gently corrects you.',
-    tags: ['Mobile app', 'iOS & Android', 'Product design', 'Prototyping'],
-    intro: 'ParrotPal is a mobile app for people who want to speak a new language out loud, not just tap through flashcards. I led the product design from the first flows to the shipped UI.',
-    problem: 'Most learning apps reward tapping, not talking. People finished lessons but still froze in real conversations.',
-    did: 'I designed a short speak, listen and repeat loop, a friendly parrot guide that reacts to your voice, and feedback that corrects without making you feel judged.',
-    changed: 'Practice became something people did out loud every day. Add your real numbers here, such as streaks, retention or ratings.',
-    flow: ['Hear a phrase', 'Say it out loud', 'Get a nudge', 'Nail it'] },
-  { id: 'openyoureyes', name: 'OpenYourEyes', kind: 'iOS app', pc: '#38bdf8', rgb: '56,189,248', icon: 'eye', mock: 'eyes',
-    blurb: 'An iOS app that reminds you to look up from the screen and rest your eyes.',
-    tags: ['iOS app', 'SwiftUI patterns', 'Health', 'Product design'],
-    intro: 'OpenYourEyes is a calm iOS app built around tiny eye-rest breaks. I designed the whole experience, from onboarding to the break screen and the widgets.',
-    problem: 'Reminders are easy to ignore. Most break apps nag, so people mute them within a week.',
-    did: 'I designed gentle, glanceable breaks that feel native to iOS, a 20-second rest ring, and a schedule that adapts to how you actually work.',
-    changed: 'Breaks felt like a breath instead of an interruption. Add your real results here.',
-    flow: ['Work', 'Soft nudge', 'Look 20 ft away', 'Back to it'] },
-  { id: 'bizbms', name: 'BizBMS', kind: 'B2B SaaS', pc: '#fbbf24', rgb: '251,191,36', icon: 'grid', mock: 'biz',
-    blurb: 'A business management system that puts inventory, billing and teams in one place.',
-    tags: ['B2B SaaS', 'Web app', 'Dashboard', 'Design system'],
-    intro: 'BizBMS helps small and mid-sized businesses run day-to-day operations. I designed the core dashboard, key workflows and a component library the team could build with.',
+  { id: 'parrotpal', name: 'ParrotPal', kind: 'AI calorie tracker', access: 'partial', pc: '#4ade80', rgb: '74,222,128', icon: 'bird', mock: 'calorie',
+    blurb: 'An AI calorie tracker that makes logging meals quick and friendly.',
+    tags: ['Mobile app', 'AI', 'Health', 'Product design'],
+    intro: 'ParrotPal is an AI calorie tracker I designed as a freelancer. Parts of it are still private, so this page shows selected screens and the thinking behind them.',
+    problem: 'Calorie tracking is tedious. Most people stop after a few days of typing in every meal by hand.',
+    did: 'I designed a logging flow where the AI does the heavy lifting, clear daily totals you can read at a glance, and feedback that encourages instead of scolding.',
+    changed: 'Add your real results here, such as daily logs, retention or ratings.',
+    flow: ['Log a meal', 'AI does the maths', 'See your day', 'Keep going'] },
+  { id: 'openyoureyes', name: 'OpenYourEyes', kind: 'iOS alarm app', access: 'nda', pc: '#38bdf8', rgb: '56,189,248', icon: 'eye', mock: 'eyes',
+    blurb: 'An iOS alarm app. Under NDA, so I share the process, not the screens.',
+    tags: ['iOS app', 'Alarm', 'Product design', 'Under NDA'],
+    intro: 'OpenYourEyes is an iOS alarm app I designed as a freelancer. The product is under NDA, so this page covers the problem, my role and how I worked, without any screens.',
+    problem: 'Alarms are easy to snooze and easy to ignore, and the first few minutes of the day set the tone for the rest of it.',
+    did: 'I owned the product design end to end: user flows, iOS-native UI, edge cases like missed alarms and silent mode, and a clean handoff to development.',
+    changed: 'I can walk you through the real screens and results on a call.',
+    flow: ['Research', 'Flows', 'iOS UI', 'Handoff'] },
+  { id: 'bauhow', name: 'Bauhow', kind: 'Design support', access: 'partial', pc: '#f472b6', rgb: '244,114,182', icon: 'people', mock: 'support',
+    blurb: 'Hands-on design support for a fast-moving team, in collaboration with Kevin.',
+    tags: ['Design support', 'Collaboration', 'UI design', 'Components'],
+    intro: 'At Bauhow I worked as design support alongside Kevin, picking up screens, components and polish as the product moved. Some of this work is shareable, so you will see selected pieces here.',
+    problem: 'A fast-moving team needed extra design hands without slowing down to onboard a full-time designer.',
+    did: 'I slotted into the existing workflow, took briefs from Kevin, designed and iterated screens, and kept new components consistent with the system already in place.',
+    changed: 'Add what shipped and what you learned here.',
+    flow: ['Brief from Kevin', 'Explore', 'Review', 'Ship'] },
+  { id: 'bizbms', name: 'BizBMS', kind: 'B2B SaaS', access: 'nda', pc: '#fbbf24', rgb: '251,191,36', icon: 'grid', mock: 'biz',
+    blurb: 'A business management system for inventory, billing and teams. Under NDA.',
+    tags: ['B2B SaaS', 'Dashboard', 'Design system', 'Under NDA'],
+    intro: 'BizBMS helps small and mid-sized businesses run day-to-day operations. I designed the core dashboard, key workflows and a component library. The product is under NDA, so I share the problem, my role and the process instead of screens.',
     problem: 'Owners juggled spreadsheets, billing tools and chat threads. Nothing talked to anything else.',
     did: 'I mapped the operations end to end, then designed one dashboard with focused workflows for stock, invoices and people, plus reusable components to keep it consistent.',
-    changed: 'Everyday tasks took fewer steps and less switching between tools. Add your real metrics here.',
-    flow: ['Mess of tools', 'Map the system', 'One dashboard', 'Ship components'] },
-  { id: 'agent', name: 'AI Agent', kind: 'AI product', pc: '#c4b5fd', rgb: '196,181,253', icon: 'spark', mock: 'agent',
-    blurb: 'An agent that turns plain-language requests into finished, multi-step work.',
-    tags: ['AI agent', 'Conversational UI', 'Trust and control', 'Product design'],
-    intro: 'This project explores how people hand real work to an AI agent and stay in control. I designed the conversation, the plan view and the moments where the agent asks for permission.',
-    problem: 'Agents are powerful but opaque. People could not see what the agent was doing, so they did not trust it with anything important.',
-    did: 'I made the agent show its plan, stream each step as it happens, ask before risky actions, and let you jump in at any point.',
-    changed: 'People handed off more and checked in less. Add your real results here.',
-    flow: ['Ask', 'See the plan', 'Approve', 'Done'] }
+    changed: 'I can walk you through the real screens and results on a call.',
+    flow: ['Mess of tools', 'Map the system', 'One dashboard', 'Ship components'] }
 ];
+const ACCESS = {
+  nda: { label: 'Under NDA', short: 'NDA', view: 'Read the brief ↗', kind: 'Under NDA' },
+  partial: { label: 'Selected screens', short: 'Selected screens', view: 'View selected work ↗', kind: 'Selected work' }
+};
 
 function mockHTML(p) {
   if (p.mock === 'parrot') return `<div class="phone"><div class="isl"></div><div class="ph-top"><span class="av">${ICONS.bird}</span>ParrotPal</div>
@@ -1334,6 +1364,15 @@ function mockHTML(p) {
   if (p.mock === 'eyes') return `<div class="phone"><div class="isl"></div><div class="ph-top"><span class="av">${ICONS.eye}</span>OpenYourEyes</div>
     <div class="ring-t"><div><div><b>20s</b><span style="color:var(--dim)">rest</span></div></div></div>
     <div style="text-align:center;font-weight:500;font-size:11px">Look at something 20 ft away</div><div style="text-align:center;color:var(--dim)">Next break in 19:40</div><div class="pill-b">I'm resting</div></div>`;
+  if (p.mock === 'calorie') return `<div class="phone"><div class="isl"></div><div class="ph-top"><span class="av">${ICONS.bird}</span>ParrotPal</div>
+    <div class="ring-t"><div><div><b>1,240</b><span style="color:var(--dim)">kcal left</span></div></div></div>
+    <div class="bub" style="max-width:100%;display:flex;justify-content:space-between;gap:6px"><span>Lunch · dal, rice</span><b>640</b></div>
+    <div class="bub" style="max-width:100%;display:flex;justify-content:space-between;gap:6px"><span>Chai + biscuits</span><b>180</b></div><div class="pill-b">+ Log a meal</div></div>`;
+  if (p.mock === 'support') return `<div class="win"><div class="win-side"><div class="bar a" style="width:70%"></div><div class="bar"></div><div class="bar" style="width:80%"></div><div class="bar" style="width:60%"></div></div>
+    <div class="win-main"><div style="display:flex;justify-content:space-between;font-weight:500"><span>Components</span><span style="color:var(--dim)">v2.4</span></div>
+    <div class="kpis"><div class="kpi"><span style="color:var(--dim)">Button</span><b>12</b></div><div class="kpi"><span style="color:var(--dim)">Card</span><b>8</b></div><div class="kpi"><span style="color:var(--dim)">Modal</span><b>4</b></div></div>
+    <div class="bub" style="max-width:100%"><b>@kevin</b> card spacing feels right now</div>
+    <div><div class="trow"><span>Settings screen</span><span>Review</span><span>Today</span></div><div class="trow"><span>Empty states</span><span>Done</span><span>Mon</span></div></div></div></div>`;
   if (p.mock === 'biz') return `<div class="win"><div class="win-side"><div class="bar a" style="width:70%"></div><div class="bar"></div><div class="bar" style="width:80%"></div><div class="bar" style="width:60%"></div><div class="bar" style="width:75%"></div></div>
     <div class="win-main"><div style="display:flex;justify-content:space-between;font-weight:500"><span>Overview</span><span style="color:var(--dim)">This week</span></div>
     <div class="kpis"><div class="kpi"><span style="color:var(--dim)">Revenue</span><b>₹4.2L</b></div><div class="kpi"><span style="color:var(--dim)">Orders</span><b>318</b></div><div class="kpi"><span style="color:var(--dim)">Low stock</span><b>12</b></div></div>
@@ -1358,11 +1397,12 @@ safe('work', () => {
   const grid = $('#workGrid');
   PROJECTS.forEach((p, i) => {
     const a = document.createElement('a');
-    a.className = 'proj'; a.href = '#work/' + p.id; a.style.setProperty('--pc', p.pc);
-    a.setAttribute('aria-label', p.name + ', ' + p.kind + '. Open case study.');
+    const ac = ACCESS[p.access];
+    a.className = 'proj' + (p.access === 'nda' ? ' is-nda' : ''); a.href = '#work/' + p.id; a.style.setProperty('--pc', p.pc);
+    a.setAttribute('aria-label', p.name + ', ' + p.kind + (ac ? ', ' + ac.label : '') + '. Open case study.');
     a.innerHTML = `<div class="flabel"><span class="nmx">${String(i + 1).padStart(2, '0')} — ${p.name}</span><span class="dims"></span></div>
-      <div class="cover"><div class="cover-in"><canvas></canvas><div class="mock-wrap">${mockHTML(p)}</div></div><div class="ring"><i></i><i></i><i></i><i></i></div></div>
-      <div class="pmeta"><h3>${p.name}</h3><span class="view">View case study ↗</span><p>${p.blurb}</p><div class="tags mono"><span class="tag">${p.kind}</span><span class="tag">${p.tags[1]}</span></div></div>`;
+      <div class="cover"><div class="cover-in"><canvas></canvas><div class="mock-wrap">${mockHTML(p)}</div></div>${ac ? `<span class="pbadge mono">${p.access === 'nda' ? ICONS.lock : ''}${ac.short}</span>` : ''}<div class="ring"><i></i><i></i><i></i><i></i></div></div>
+      <div class="pmeta"><h3>${p.name}</h3><span class="view">${ac ? ac.view : 'View case study ↗'}</span><p>${p.blurb}</p><div class="tags mono"><span class="tag">${p.kind}</span><span class="tag">${p.tags[1]}</span></div></div>`;
     grid.appendChild(a);
     safe('pdither', () => createDither($('canvas', a), { cell: 5, strength: .7, seed: i * 4.7 + 1, scale: 2.6, color: p.rgb, alphaMul: 1.5, track: a }));
   });
@@ -1376,10 +1416,11 @@ let lastFocus = null;
 function renderDetail(p) {
   const idx = PROJECTS.indexOf(p); const next = PROJECTS[(idx + 1) % PROJECTS.length];
   $('#dIn').innerHTML = `<a class="back" href="#work">↩ back</a>
-    <div class="d-head" style="--pc:${p.pc}"><div class="d-icon">${ICONS[p.icon]}</div><div><h1 id="dTitle">${p.name}</h1><div class="k">${p.kind} · Case study</div></div></div>
+    <div class="d-head" style="--pc:${p.pc}"><div class="d-icon">${ICONS[p.icon]}</div><div><h1 id="dTitle">${p.name}</h1><div class="k">${p.kind} · ${ACCESS[p.access] ? ACCESS[p.access].kind : 'Case study'}</div></div></div>
     <div class="d-tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
     <p class="d-p">${p.intro}</p>
-    <div class="shot l" style="--pc:${p.pc}"><div class="clip">${ICONS.clip}</div><div class="mock-wrap">${mockHTML(p)}</div><div class="cap">${ICONS.arrow}the final design</div></div>
+    ${p.access === 'nda' ? `<div class="nda-card"><span class="nda-ic">${ICONS.lock}</span><div><b>Under NDA</b><p>I can't share screens from this project. Below is the problem, my role and how I worked. I'm happy to walk you through the real work on a call.</p><a class="hv-btn" href="#contact">Ask for a walkthrough <span aria-hidden="true">&#8250;</span></a></div></div>`
+      : `${p.access === 'partial' ? `<p class="d-note">${ICONS.lock}Showing selected screens only. The rest is still private.</p>` : ''}<div class="shot l" style="--pc:${p.pc}"><div class="clip">${ICONS.clip}</div><div class="mock-wrap">${mockHTML(p)}</div><div class="cap">${ICONS.arrow}the final design</div></div>`}
     <h3 class="d-h3">The problem</h3><p class="d-p">${p.problem}</p>
     <h3 class="d-h3">What I did</h3><p class="d-p">${p.did}</p>
     <div class="shot r"><div class="clip">${ICONS.clip}</div><div class="flow">${p.flow.map((s, i) => `<span class="n">${s}</span>${i < p.flow.length - 1 ? '<span class="ar">→</span>' : ''}`).join('')}</div><div class="cap">early flow sketch${ICONS.arrow}</div></div>
@@ -1631,8 +1672,12 @@ safe('timeline', () => {
   $$('.tl-proj', wrap).forEach(a => {
     const p = PROJECTS.find(x => x.id === a.dataset.proj); if (!p) return;
     a.style.setProperty('--pc', p.pc); a.style.setProperty('--rgb', p.rgb);
-    $('.tl-thumb', a).innerHTML = ICONS[p.icon]; $('b', a).textContent = p.name; $('small', a).textContent = p.blurb;
+    const ac = ACCESS[p.access];
+    $('.tl-thumb', a).innerHTML = ICONS[p.icon];
+    $('b', a).innerHTML = `${p.name} <span class="tl-kind">· ${p.kind}</span>${ac ? `<span class="tl-badge mono${p.access === 'partial' ? ' ok' : ''}">${ac.short}</span>` : ''}`;
+    $('small', a).textContent = p.blurb;
   });
+  $$('.tl-thumb[data-icon]', wrap).forEach(t => { t.innerHTML = ICONS[t.dataset.icon]; });
   let q = false;
   const update = () => {
     q = false;
