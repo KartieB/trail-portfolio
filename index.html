@@ -79,11 +79,17 @@ a{color:inherit}
 
 /* work experience */
 .xp-h{margin:100px 0 0 var(--col);font:400 16px/26px var(--display);color:#282828}
-.xp{list-style:none;margin:15px 0 0 calc(var(--col) - 85px);display:flex;flex-direction:column;gap:15px;--yw:64px;--gap:56px}
+.xp{position:relative;list-style:none;margin:15px 0 0 calc(var(--col) - 85px);display:flex;flex-direction:column;gap:15px;--yw:64px;--gap:56px}
 .xr{position:relative;display:flex;gap:var(--gap);width:638px}
 .xr:not(:last-child)::before{content:"";position:absolute;left:calc(var(--yw) + 21px);top:48px;width:1px;height:calc(100% + 15px);background:repeating-linear-gradient(var(--line) 0 4px,transparent 4px 8px)}
 .dot{position:absolute;left:calc(var(--yw) + 16px);top:42px;width:10px;height:10px;border-radius:5px;background:#fff;border:1.6px solid #b4b2b2;box-shadow:0 0 0 4px rgba(203,200,200,.15);z-index:1}
 .dot.now{background:#f6f6f3;border-color:var(--blue);box-shadow:0 0 0 4px rgba(13,65,255,.15)}
+.dot{transition:border-color .3s ease-out,box-shadow .3s ease-out,background-color .3s ease-out}
+.xr.reached .dot{background:#f6f6f3;border-color:var(--blue);box-shadow:0 0 0 4px rgba(13,65,255,.15)}
+/* scroll progress: a solid blue line with a glowing tip fills the dashed track */
+.xp-prog{position:absolute;left:calc(var(--yw) + 21px);top:var(--y0,47px);width:2px;height:var(--fill,0px);margin-left:-.5px;border-radius:1px;background:linear-gradient(rgba(13,65,255,.35),var(--blue) 40px);z-index:1;pointer-events:none;list-style:none}
+.xp-prog::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:28px;transform:translateX(-50%);background:linear-gradient(90deg,rgba(13,65,255,0),rgba(13,65,255,.07),rgba(13,65,255,0));-webkit-mask-image:linear-gradient(transparent,#000 60%);mask-image:linear-gradient(transparent,#000 60%)}
+.xp-tip{position:absolute;left:50%;bottom:-6px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px rgba(13,65,255,.12),0 0 18px 6px rgba(13,65,255,.22);opacity:var(--tip,0);transition:opacity .25s ease-out}
 .yr{flex:none;width:var(--yw);padding-top:40px;text-align:right;text-transform:uppercase;white-space:nowrap}
 .yr small{display:block;font:400 10px/15px var(--mono);color:var(--ink-40)}
 .yr b{display:block;padding-top:2px;font:500 13px/20px var(--mono);color:var(--ink-65)}
@@ -159,6 +165,7 @@ a{color:inherit}
 
   <h2 class="xp-h">Work Experience</h2>
   <ol class="xp" aria-label="Work experience">
+    <li class="xp-prog" aria-hidden="true"><i class="xp-tip"></i></li>
     <li class="xr">
       <span class="dot now" aria-hidden="true"></span>
       <div class="yr"><small>10 mo</small><b>2026</b></div>
@@ -254,6 +261,37 @@ a{color:inherit}
     const chip = chips[turn]; turn = (turn + 1) % chips.length;
     if (Date.now() - chip._clicked > 5000) chip._swap();
   }, 2000);
+
+  // work experience: blue line eases down the dashed track as you scroll
+  const xp = document.querySelector('.xp');
+  if (xp) {
+    const rows = [...xp.querySelectorAll('.xr')], prog = xp.querySelector('.xp-prog');
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let y0 = 0, total = 0, stops = [], cur = 0, target = 0, raf = 0;
+    const measure = () => {
+      const top = xp.getBoundingClientRect().top;
+      stops = rows.map(r => { const d = r.querySelector('.dot').getBoundingClientRect(); return d.top + d.height / 2 - top; });
+      y0 = stops[0]; total = stops[stops.length - 1] - y0;
+      xp.style.setProperty('--y0', y0 + 'px');
+    };
+    const aim = () => {
+      const r = xp.getBoundingClientRect();
+      target = Math.max(0, Math.min(total, innerHeight * 0.62 - (r.top + y0)));
+      if (!raf) raf = requestAnimationFrame(step);
+    };
+    const step = () => {
+      cur = still ? target : cur + (target - cur) * 0.14;
+      if (Math.abs(target - cur) < 0.3) cur = target;
+      xp.style.setProperty('--fill', cur.toFixed(1) + 'px');
+      xp.style.setProperty('--tip', cur > 1 && cur < total - 1 ? 1 : 0);
+      rows.forEach((row, i) => row.classList.toggle('reached', stops[i] - y0 <= cur + 1));
+      raf = cur === target ? 0 : requestAnimationFrame(step);
+    };
+    measure(); aim();
+    addEventListener('scroll', aim, { passive: true });
+    addEventListener('resize', () => { measure(); aim(); });
+    addEventListener('load', () => { measure(); aim(); });
+  }
 
   // project row: an endless, slow marquee; hover or hold to pause, drag to nudge
   const strip = document.getElementById('work'), row = strip.querySelector('.strip-in'), drag = strip.querySelector('.strip-drag');
