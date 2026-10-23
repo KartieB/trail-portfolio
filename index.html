@@ -44,11 +44,14 @@ a{color:inherit}
 .where{position:absolute;left:calc(83.33% - 24px);top:40px;display:flex;gap:4px;font-size:13px;line-height:20px;color:var(--ink-60);white-space:nowrap}
 
 /* intro */
-.intro{margin-left:var(--col);width:502px;display:flex;flex-direction:column;gap:24px}
+.intro{margin-left:var(--col);width:max-content;max-width:calc(100vw - var(--col) - 24px);display:flex;flex-direction:column;gap:24px}
 .intro p{font-size:16px;line-height:24px;color:var(--ink)}
 .l{display:block;white-space:nowrap}
 .blue{color:var(--blue);font-weight:500}
 .rows{display:flex;flex-direction:column;gap:8px}
+.rows p{white-space:nowrap}
+.mbr{display:none}
+.nw{white-space:nowrap}
 .chip{display:inline-flex;align-items:center;gap:5.236px;height:24px;padding:0 10.473px 0 2.618px;border:0;border-radius:999px;background:var(--chip);font:500 16px/24px var(--sans);color:var(--ink);vertical-align:top;margin:0 3px;cursor:pointer;-webkit-tap-highlight-color:transparent;white-space:nowrap}
 .chip:focus{outline:none}.chip:focus-visible{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
 .ct{display:inline-block}
@@ -108,16 +111,27 @@ a{color:inherit}
   :root{--col:24px}
   .page{padding:110px 0 140px}
   .where{left:auto;right:24px;top:28px}
-  .intro{width:auto;max-width:540px;padding-right:24px}
+  .intro{width:auto;max-width:560px;padding-right:24px}
+  .rows p{white-space:normal}
   .l{display:inline;white-space:normal}
   .l.keep{display:block}
   .xp{margin-left:24px;margin-right:24px}
   .xr{width:auto;max-width:638px}
 }
 @media (max-width:640px){
+  /* Figma: Mobile verison (402 wide) */
+  :root{--col:20px}
+  body{background:#fff}
+  .page{padding-top:103px}
+  .where{left:20px;right:auto;top:40px;color:#575757}
+  .where .place{margin-right:3px}
+  .intro{max-width:none;padding-right:20px}
+  .mbr{display:inline}
+  .rows .nw{display:block}
+  .rows .nw + .nw{margin-top:8px}
+  .chip{margin:0 2px}
   .card{width:78vw;height:78vw}
-  .xp{--yw:52px;--gap:40px}
-  .chip{margin:2px 2px}
+  .xp{--yw:52px;--gap:40px;margin-left:20px;margin-right:20px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.strip-in{animation:none}}
 </style>
@@ -125,16 +139,16 @@ a{color:inherit}
 <body>
 <div class="corner" aria-hidden="true"><i></i></div>
 <main class="page">
-  <p class="where"><span>Tamilnadu, India</span><span>IST</span><span id="time">--:--</span></p>
+  <p class="where"><span class="place">Tamilnadu, India</span><span>IST</span><span id="time">--:--</span></p>
 
   <h1 class="sr">Karthik B, freelance product designer</h1>
   <section class="intro" aria-label="Introduction">
-    <p><span class="l">I’m Karthik, a freelance <span class="blue">product designer</span> with 2+ years of shipping</span> <span class="l">products and an engineer’s eye for detail.</span></p>
+    <p><span class="l">I’m Karthik, a freelance <span class="blue">product designer</span><br class="mbr"> with 2+ years of shipping</span> <span class="l">products and an engineer’s eye for detail.</span></p>
     <div class="rows">
-      <p>I make <button class="chip" type="button" data-group="make" aria-label="iOS apps. Click for another one."><span class="ic" aria-hidden="true"><img src="assets/chips/ios-apps.svg" alt=""></span><span class="ct">iOS apps</span></button> feel simple, obsess over <button class="chip" type="button" data-group="care" aria-label="Typography. Click for another one."><span class="ic" aria-hidden="true"><img src="assets/chips/typography.svg" alt=""></span><span class="ct">Typography</span></button></p>
+      <p><span class="nw">I make <button class="chip" type="button" data-group="make" aria-label="iOS apps. Click for another one."><span class="ic" aria-hidden="true"><img src="assets/chips/ios-apps.svg" alt=""></span><span class="ct">iOS apps</span></button> feel simple,</span> <span class="nw">obsess over <button class="chip" type="button" data-group="care" aria-label="Typography. Click for another one."><span class="ic" aria-hidden="true"><img src="assets/chips/typography.svg" alt=""></span><span class="ct">Typography</span></button></span></p>
       <p>bring ideas to life with <button class="chip" type="button" data-group="tools" aria-label="Figma. Click for another one."><span class="ic" aria-hidden="true"><img src="assets/chips/figma.svg" alt=""></span><span class="ct">Figma</span></button></p>
     </div>
-    <p><span class="l">Currently open for full-time and collaborations</span> <span class="l keep"><a class="dot-u" href="mailto:kartiedesigner@gmail.com?subject=Let%E2%80%99s%20book%20a%20call">Book a call</a> or DM me at <a class="dot-u" href="mailto:kartiedesigner@gmail.com">kartiedesigner@gmail.com</a></span></p>
+    <p><span class="l">Currently open for full-time and collaborations</span> <span class="l keep"><a class="dot-u" href="mailto:kartiedesigner@gmail.com?subject=Let%E2%80%99s%20book%20a%20call">Book a call</a> or DM me at<br class="mbr"> <a class="dot-u" href="mailto:kartiedesigner@gmail.com">kartiedesigner@gmail.com</a></span></p>
   </section>
 
   <section class="strip" id="work" aria-label="Selected work">
