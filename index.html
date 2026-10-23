@@ -62,7 +62,6 @@ a{color:inherit}
 .strip-drag{transform:translateX(var(--dx,0px))}
 .strip-in{display:flex;width:max-content;animation:marquee var(--dur,64s) linear infinite}
 .strip.held .strip-in{animation-play-state:paused}
-@media (hover:hover){.strip:hover .strip-in{animation-play-state:paused}}
 @keyframes marquee{to{transform:translateX(-50%)}}
 .card{flex:none;width:500px;height:500px;margin-right:12px;border-radius:8px;background:var(--card)}
 .card.has-img{overflow:hidden}
@@ -174,7 +173,7 @@ a{color:inherit}
   [...row.children].forEach(c => { const k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); k.querySelectorAll('img').forEach(i => i.alt = ''); row.appendChild(k); });
   let setW = 0, dx = 0, down = false, sx = 0, base = 0;
   const measure = () => {
-    setW = row.scrollWidth / 2; const dur = setW / 40;
+    setW = row.scrollWidth / 2; const dur = setW / 80;
     row.style.setProperty('--dur', dur.toFixed(1) + 's');
     // start with the first real project centred on screen
     const hero = row.querySelector('.has-img');
