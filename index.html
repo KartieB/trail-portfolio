@@ -57,10 +57,14 @@ a{color:inherit}
 .dot-u:hover{color:var(--blue)}
 
 /* projects */
-.strip{margin-top:54px;overflow-x:auto;scrollbar-width:none;cursor:grab;width:100vw;position:relative;left:50%;transform:translateX(-50%)}
-.strip::-webkit-scrollbar{display:none}
-.strip-in{display:flex;gap:12px;width:max-content;padding:0 12px;margin:0 auto}
-.card{flex:none;width:500px;height:500px;border-radius:8px;background:var(--card)}
+.strip{margin-top:54px;overflow:hidden;cursor:grab;width:100vw;position:relative;left:50%;transform:translateX(-50%);touch-action:pan-y;user-select:none}
+.strip.held{cursor:grabbing}
+.strip-drag{transform:translateX(var(--dx,0px))}
+.strip-in{display:flex;width:max-content;animation:marquee var(--dur,64s) linear infinite}
+.strip.held .strip-in{animation-play-state:paused}
+@media (hover:hover){.strip:hover .strip-in{animation-play-state:paused}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.card{flex:none;width:500px;height:500px;margin-right:12px;border-radius:8px;background:var(--card)}
 .card.has-img{overflow:hidden}
 .card img{display:block;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;image-rendering:auto;user-select:none;-webkit-user-drag:none}
 
@@ -95,7 +99,7 @@ a{color:inherit}
   .xp{--yw:52px;--gap:40px}
   .chip{margin:2px 2px}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.strip-in{animation:none}}
 </style>
 </head>
 <body>
@@ -114,9 +118,9 @@ a{color:inherit}
   </section>
 
   <section class="strip" id="work" aria-label="Selected work">
-    <div class="strip-in">
+    <div class="strip-drag"><div class="strip-in">
       <div class="card"></div><div class="card"></div><figure class="card has-img"><img src="assets/work/dailyloop-1000.webp" srcset="assets/work/dailyloop-1000.webp 1000w, assets/work/dailyloop-2000.webp 2000w" sizes="(max-width:640px) 78vw, 500px" alt="DailyLoop habit tracker app: a welcome screen and a daily to-do list screen" width="1000" height="1000" decoding="async" draggable="false"></figure><div class="card"></div><div class="card"></div>
-    </div>
+    </div></div>
   </section>
 
   <h2 class="xp-h">Work Experience</h2>
@@ -165,43 +169,27 @@ a{color:inherit}
   const tick = () => { t.textContent = fmt.format(new Date()); };
   tick(); setInterval(tick, 30000);
 
-  // project row: start centred like the design, drag to scroll on desktop
-  const strip = document.getElementById('work');
-  const centre = () => { strip.scrollLeft = (strip.scrollWidth - strip.clientWidth) / 2; };
-  let moved = false;
-  const fit = () => { if (!moved) centre(); };
-  requestAnimationFrame(fit); addEventListener('load', fit); addEventListener('resize', fit);
-  strip.addEventListener('scroll', () => { if (down) moved = true; }, { passive: true });
-  strip.addEventListener('touchstart', () => { moved = true; }, { passive: true });
-  let down = false, sx = 0, sl = 0;
-  strip.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = strip.scrollLeft; strip.style.cursor = 'grabbing'; });
-  addEventListener('pointermove', e => { if (down) strip.scrollLeft = sl - (e.clientX - sx); });
-  addEventListener('pointerup', () => { down = false; strip.style.cursor = ''; });
-
-  // gentle auto-drift: glides side to side, pauses while hovered or touched
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const SPEED = 18; // px per second
-  let pos = null, dir = 1, last = 0, hold = 0, hover = false, seen = true;
-  const pause = ms => { hold = performance.now() + ms; pos = null; };
-  strip.addEventListener('mouseenter', () => { hover = true; });
-  strip.addEventListener('mouseleave', () => { hover = false; pause(1200); });
-  strip.addEventListener('pointerdown', () => pause(3000));
-  strip.addEventListener('touchstart', () => pause(3500), { passive: true });
-  strip.addEventListener('wheel', () => pause(3000), { passive: true });
-  strip.addEventListener('scroll', () => { if (pos !== null && Math.abs(strip.scrollLeft - pos) > 3) pause(3000); }, { passive: true });
-  new IntersectionObserver(([e]) => { seen = e.isIntersecting; pos = null; }).observe(strip);
-  const step = ts => {
-    const dt = Math.min(.05, (ts - (last || ts)) / 1000); last = ts;
-    if (seen && !hover && !down && ts > hold) {
-      const max = strip.scrollWidth - strip.clientWidth;
-      if (pos === null) pos = strip.scrollLeft;
-      pos += dir * SPEED * dt;
-      if (pos >= max) { pos = max; dir = -1; } else if (pos <= 0) { pos = 0; dir = 1; }
-      strip.scrollLeft = pos;
+  // project row: an endless, slow marquee; hover or hold to pause, drag to nudge
+  const strip = document.getElementById('work'), row = strip.querySelector('.strip-in'), drag = strip.querySelector('.strip-drag');
+  [...row.children].forEach(c => { const k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); k.querySelectorAll('img').forEach(i => i.alt = ''); row.appendChild(k); });
+  let setW = 0, dx = 0, down = false, sx = 0, base = 0;
+  const measure = () => {
+    setW = row.scrollWidth / 2; const dur = setW / 40;
+    row.style.setProperty('--dur', dur.toFixed(1) + 's');
+    // start with the first real project centred on screen
+    const hero = row.querySelector('.has-img');
+    if (hero && !row.dataset.started) {
+      const off = hero.offsetLeft + hero.offsetWidth / 2 - strip.clientWidth / 2;
+      row.style.animationDelay = (-((off % setW + setW) % setW) / setW * dur).toFixed(2) + 's';
+      row.dataset.started = '1';
     }
-    requestAnimationFrame(step);
   };
-  setTimeout(() => requestAnimationFrame(step), 1200);
+  measure(); addEventListener('resize', measure); addEventListener('load', measure);
+  const wrap = v => { if (!setW) return v; v %= setW; return v > 0 ? v - setW : v; };
+  strip.addEventListener('pointerdown', e => { down = true; sx = e.clientX; base = dx; strip.classList.add('held'); strip.setPointerCapture(e.pointerId); });
+  strip.addEventListener('pointermove', e => { if (!down) return; dx = wrap(base + e.clientX - sx); drag.style.setProperty('--dx', dx + 'px'); });
+  const up = () => { down = false; strip.classList.remove('held'); };
+  strip.addEventListener('pointerup', up); strip.addEventListener('pointercancel', up);
 })();
 </script>
 </body>
