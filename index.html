@@ -482,10 +482,10 @@ html:is([data-theme="dark"],[data-theme="blueprint"]) .tl-badge.ok{color:#4ade80
 /* Hero: clean letter */
 .hero:has(.hv){--hero-pt:112px;padding:var(--hero-pt) 0 96px}
 .hero .hv,.hero .strip{position:relative;z-index:1}
-.hv{position:relative;max-width:556px;margin:0 auto;text-align:left!important;padding-left:0!important}
-html[data-theme="light"]{--hero-ink:#7f7f7f;--hchip:#e9e9e5;--red:#bc2c2e}
-html[data-theme="dark"]{--hero-ink:rgba(237,237,237,.58);--hchip:#2b2b29;--red:#f26b68}
-html[data-theme="blueprint"]{--hero-ink:rgba(242,246,255,.74);--hchip:rgba(255,255,255,.14);--red:#ffb3b0}
+.hv{position:relative;max-width:584px;margin:0 auto;text-align:left!important;padding-left:0!important}
+html[data-theme="light"]{--hero-ink:#7f7f7f;--hchip:#e9e9e5;--hchip-ink:#151515;--red:#bc2c2e}
+html[data-theme="dark"]{--hero-ink:rgba(237,237,237,.58);--hchip:#2b2b29;--hchip-ink:#f5f5f3;--red:#f26b68}
+html[data-theme="blueprint"]{--hero-ink:rgba(242,246,255,.74);--hchip:rgba(255,255,255,.14);--hchip-ink:#f2f6ff;--red:#ffb3b0}
 .hv-copy p{font-size:16px;line-height:28px;font-weight:500;letter-spacing:-.005em;color:var(--hero-ink);margin:0;text-wrap:pretty}
 .hv-copy p+p{margin-top:20px}
 .hv-copy p:nth-child(2){line-height:32px}
@@ -493,7 +493,7 @@ html[data-theme="blueprint"]{--hero-ink:rgba(242,246,255,.74);--hchip:rgba(255,2
 .hv-copy p:first-child{max-width:510px}
 @media (max-width:640px){.hv-l1{white-space:normal}}
 .hv-copy b{font-weight:500;color:inherit}
-.hv .chip{height:24px;font-size:13.5px;font-weight:500;line-height:24px;gap:5px;padding:0 10.5px 0 3px;margin:0 1px 0 0;border-radius:999px;background:var(--hchip);color:var(--fg);vertical-align:-5px;overflow:visible;clip-path:inset(-8px 0 -8px -8px round 0 12px 12px 0)}
+.hv .chip{height:24px;font-size:16px;font-weight:500;letter-spacing:-.015em;line-height:24px;gap:5px;padding:0 10.5px 0 2.6px;margin:0 1px 0 0;border-radius:999px;background:var(--hchip);color:var(--hchip-ink);vertical-align:-5px;overflow:visible;clip-path:inset(-8px 0 -8px -8px round 0 12px 12px 0)}
 .hv .chip:hover{background:var(--chip-h)}
 html[data-theme="light"] .hv .chip:hover{background:#e0e0db}
 .hv .ci{position:relative;display:block;width:25px;height:24px;flex:none}
@@ -875,7 +875,7 @@ html.gear5 .hero::after{content:"GEAR 5";position:absolute;right:0;bottom:30px;f
       <h1 class="sr">Karthik B, product designer</h1>
       <div class="hv-copy" id="lead">
         <p>I&#8217;m <b class="nm-in wv" id="heroName">Karthik</b>, a freelance <span class="sel" id="sel" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false" aria-label="product designer. Click to change its colour."><span class="sel-t" id="selT">product designer</span><span class="ftb" id="ftbSw" role="radiogroup" aria-label="Text colour"></span></span> with 2+ years of shipping products and an engineer&#8217;s eye for detail.</p>
-        <p><span class="hv-l1">I make <span class="nb"><button class="chip"></button></span> feel simple, obsess over <span class="nb"><button class="chip"></button>,</span></span><br> and bring ideas to life with <span class="nb"><button class="chip"></button>.</span></p>
+        <p><span class="hv-l1">I make <span class="nb"><button class="chip"></button></span> feel simple, obsess over <span class="nb"><button class="chip"></button></span></span><br> and bring ideas to life with <span class="nb"><button class="chip"></button></span></p>
         <p class="hv-open">Currently open for full-time and collaborations.<br><a href="#contact">Book a call</a> or DM me at <a href="mailto:kartiedesigner@gmail.com">kartiedesigner@gmail.com</a></p>
       </div>
       <div class="hv-foot">
