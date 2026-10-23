@@ -83,17 +83,17 @@ a{color:inherit}
 .xr{position:relative;display:flex;gap:var(--gap);width:638px}
 .xr:not(:last-child)::before{content:"";position:absolute;left:calc(var(--yw) + 21px);top:48px;width:1px;height:calc(100% + 15px);background:repeating-linear-gradient(var(--line) 0 4px,transparent 4px 8px)}
 .dot{position:absolute;left:calc(var(--yw) + 16px);top:42px;width:10px;height:10px;border-radius:5px;background:#fff;border:1.6px solid #b4b2b2;box-shadow:0 0 0 4px rgba(203,200,200,.15);z-index:1}
-.dot.now{background:#f6f6f3;border-color:var(--blue);box-shadow:0 0 0 4px rgba(13,65,255,.15)}
+.dot.now{background:#fff;border-color:var(--ink);box-shadow:0 0 0 4px rgba(31,31,31,.08)}
 .dot{transition:border-color .3s ease-out,box-shadow .3s ease-out,background-color .3s ease-out}
-.xr.reached .dot{background:#f6f6f3;border-color:var(--blue);box-shadow:0 0 0 4px rgba(13,65,255,.15)}
+.xr.reached .dot{background:#fff;border-color:var(--ink);box-shadow:0 0 0 4px rgba(31,31,31,.08)}
 /* scroll progress: a solid blue line with a glowing tip fills the dashed track */
-.xp-prog{position:absolute;left:calc(var(--yw) + 21px);top:var(--y0,47px);width:1px;height:var(--fill,0px);border-radius:1px;background:rgba(13,65,255,.38);z-index:1;pointer-events:none;list-style:none}
+.xp-prog{position:absolute;left:calc(var(--yw) + 21px);top:var(--y0,47px);width:1px;height:var(--fill,0px);border-radius:1px;background:rgba(31,31,31,.28);z-index:1;pointer-events:none;list-style:none}
 .yr{flex:none;width:var(--yw);padding-top:40px;text-align:right;text-transform:uppercase;white-space:nowrap}
 .yr small{display:block;font:400 10px/15px var(--mono);color:var(--ink-40)}
 .yr b{display:block;padding-top:2px;font:500 13px/20px var(--mono);color:var(--ink-65)}
 .xc{flex:1;min-width:0;padding-top:35px;display:flex;flex-direction:column;gap:2px}
 .xt{display:flex;align-items:center;gap:12px;font-size:16px;line-height:24px;color:var(--ink)}
-.cur{font:500 14px/24px var(--mono);color:var(--blue);text-transform:uppercase;padding-top:1px}
+.cur{font:500 14px/24px var(--mono);color:var(--ink);text-transform:uppercase;padding-top:1px}
 .role{padding-top:2px;font-size:15px;line-height:24px;color:var(--ink-70)}
 .desc{padding-top:6px;font-size:15px;line-height:24px;color:var(--ink-60);max-width:518px}
 
