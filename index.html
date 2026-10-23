@@ -229,10 +229,13 @@ a{color:inherit}
     tools: [['Figma', 'figma'], ['Framer', 'framer'], ['Cursor', 'cursor'], ['Claude', 'claude'], ['Codex', 'codex'], ['Paper', 'paper']]
   };
   Object.values(CHIPS).flat().forEach(([, f]) => { const im = new Image(); im.src = 'assets/chips/' + f + '.svg'; });
-  document.querySelectorAll('.chip[data-group]').forEach(chip => {
+  const chips = [...document.querySelectorAll('.chip[data-group]')];
+  chips.forEach(chip => {
     const list = CHIPS[chip.dataset.group]; let k = 0;
     const ct = chip.querySelector('.ct'), img = chip.querySelector('.ic img');
-    chip.addEventListener('click', () => {
+    chip._clicked = 0;
+    chip.addEventListener('click', () => { chip._clicked = Date.now(); chip._swap(); });
+    chip._swap = () => {
       k = (k + 1) % list.length; const [label, file] = list[k];
       const order = [...label].map((_, i) => i).sort(() => Math.random() - .5);
       ct.classList.remove('in');
@@ -241,8 +244,16 @@ a{color:inherit}
       img.src = 'assets/chips/' + file + '.svg';
       img.classList.remove('pop'); void img.offsetWidth; img.classList.add('pop');
       chip.setAttribute('aria-label', label + '. Click for another one.');
-    });
+    };
   });
+  // auto: one chip at a time, in turn; skip a chip someone just clicked; only while the hero is visible
+  let turn = 0, heroSeen = true;
+  new IntersectionObserver(([e]) => { heroSeen = e.isIntersecting; }).observe(document.querySelector('.intro'));
+  setInterval(() => {
+    if (!heroSeen || document.hidden) return;
+    const chip = chips[turn]; turn = (turn + 1) % chips.length;
+    if (Date.now() - chip._clicked > 5000) chip._swap();
+  }, 2000);
 
   // project row: an endless, slow marquee; hover or hold to pause, drag to nudge
   const strip = document.getElementById('work'), row = strip.querySelector('.strip-in'), drag = strip.querySelector('.strip-drag');
