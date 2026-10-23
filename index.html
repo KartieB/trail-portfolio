@@ -87,8 +87,7 @@ a{color:inherit}
 .dot{transition:border-color .3s ease-out,box-shadow .3s ease-out,background-color .3s ease-out}
 .xr.reached .dot{background:#f6f6f3;border-color:var(--blue);box-shadow:0 0 0 4px rgba(13,65,255,.15)}
 /* scroll progress: a solid blue line with a glowing tip fills the dashed track */
-.xp-prog{position:absolute;left:calc(var(--yw) + 21px);top:var(--y0,47px);width:2px;height:var(--fill,0px);margin-left:-.5px;border-radius:1px;background:linear-gradient(rgba(13,65,255,.35),var(--blue) 40px);z-index:1;pointer-events:none;list-style:none}
-.xp-prog::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:28px;transform:translateX(-50%);background:linear-gradient(90deg,rgba(13,65,255,0),rgba(13,65,255,.07),rgba(13,65,255,0));-webkit-mask-image:linear-gradient(transparent,#000 60%);mask-image:linear-gradient(transparent,#000 60%)}
+.xp-prog{position:absolute;left:calc(var(--yw) + 21px);top:var(--y0,47px);width:2px;height:var(--fill,0px);margin-left:-.5px;border-radius:1px;background:var(--blue);z-index:1;pointer-events:none;list-style:none}
 .yr{flex:none;width:var(--yw);padding-top:40px;text-align:right;text-transform:uppercase;white-space:nowrap}
 .yr small{display:block;font:400 10px/15px var(--mono);color:var(--ink-40)}
 .yr b{display:block;padding-top:2px;font:500 13px/20px var(--mono);color:var(--ink-65)}
