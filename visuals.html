@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +35,7 @@ html[data-theme="dark"]{
   color-scheme:dark;
 }
 html[data-theme="light"]{
-  --bg:#f6f6f3;--bg-2:#ececE8;--card:#ffffff;--panel:rgba(255,255,255,.92);
+  --bg:#ffffff;--bg-2:#f2f2ef;--card:#ffffff;--panel:rgba(255,255,255,.92);
   --fg:#151515;--muted:rgba(21,21,21,.66);--dim:rgba(21,21,21,.45);
   --line:rgba(0,0,0,.08);--line-2:rgba(0,0,0,.16);
   --dither:20,20,20;--dither-a:.17;--shadow:0 12px 32px rgba(0,0,0,.1);
@@ -601,6 +601,53 @@ dialog.lb::backdrop{background:rgba(0,0,0,.72)}
 .lb-b:hover{background:rgba(255,255,255,.1)}
 .lb-b:active{transform:scale(.96)}
 @media (max-width:980px){.v-bar{top:56px}.v-count{display:none}}
+
+/* ---- Gallery layout ---- */
+body{background:var(--bg)}
+.page{max-width:1440px;border-left:0;border-right:0;padding:0 28px}
+nav.top{padding:14px 28px}
+.v-hero{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;padding:28px 0 18px}
+.v-hero .sheet{display:none}
+.v-hero .h2{font-size:20px;font-weight:500;letter-spacing:-.01em}
+.v-hero .sub{margin:0;font-size:15px;color:var(--dim);max-width:none}
+.v-bar{position:static;border-bottom:0;padding:0 0 22px;margin:0;gap:10px}
+.fchip{height:34px;border:0;background:var(--bg-2);color:var(--muted);font-size:15px;padding:0 15px}
+.fchip small{display:none}
+.fchip:hover{color:var(--fg);background:var(--line-2)}
+.fchip[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.v-count{display:none}
+.v-sort{margin-left:auto;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--fg);background:var(--bg);transition:background-color .15s ease-out}
+.v-sort:hover{background:var(--bg-2)}
+.v-sort svg{width:10px;height:10px;color:var(--dim)}
+.vz{columns:4 260px;column-gap:16px;padding:0 0 96px}
+.vt{position:relative;margin:0 0 16px;border:1px solid var(--line);border-radius:4px;background:var(--bg-2);cursor:zoom-in}
+.vt-m{background:var(--bg-2)}
+.vt-open::after{display:none}
+.vt-c{position:absolute;left:12px;bottom:12px;border:0;padding:0;z-index:3;pointer-events:none}
+.vt-c b{display:block;font-size:13px;font-weight:500;color:#fff;background:rgba(20,20,20,.88);padding:5px 9px;border-radius:7px;white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .15s ease-out,transform .15s ease-out}
+.vt:hover .vt-c b,.vt:focus-within .vt-c b{opacity:1;transform:none}
+footer.bot{border-top:0}
+/* ---- Viewer ---- */
+dialog.lb::backdrop{background:rgba(10,10,10,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.lb-in{width:min(1170px,88vw);margin:7vh auto 0;gap:12px}
+.lb-m{aspect-ratio:1170/834;max-height:80vh;border:0;border-radius:2px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+html[data-theme="dark"] .lb-m{background:#161618}
+.lb-m .mock-wrap{transform:none;padding:6% 0}
+.lb-m .phone{height:86%}
+.lb-m .win,.lb-m .agent{width:62%}
+.lb-m.is-live{display:grid;place-items:center;padding:48px}
+.lb-m.is-live > :not(.led-wrap):not(.hint):not(.tgl-note){transform:scale(1.35)}
+.lb-m.is-live .led-wrap{width:72%}
+.lb-c{justify-content:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.9)}
+.lb-c span{color:rgba(255,255,255,.55)}
+.lb-x{position:fixed;top:24px;right:24px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#f5f5f5;background:rgba(20,20,20,.8);border:1px solid rgba(255,255,255,.14);transition:background-color .15s ease-out,transform .15s ease-out}
+.lb-x svg{width:20px;height:20px}
+.lb-x:hover{background:rgba(40,40,40,.9)}
+.lb-x:active{transform:scale(.95)}
+.lb-b{position:fixed;top:50%;width:44px;height:44px;margin-top:-22px;border-radius:50%;background:rgba(20,20,20,.7);border-color:rgba(255,255,255,.14)}
+.lb-b svg{width:18px;height:18px}
+.lb-prev{left:24px}.lb-next{right:24px}
+@media (max-width:760px){.page{padding:0 16px}nav.top{padding:12px 16px}.vz{columns:1}.vt{margin-bottom:10px}.lb-in{width:94vw;margin-top:14vh}.lb-x{top:14px;right:14px;width:44px;height:44px}.lb-b{display:none}.lb-m .mock-wrap{padding:4% 0}.lb-m.is-live > :not(.led-wrap):not(.hint):not(.tgl-note){transform:none}.lb-m.is-live .led-wrap{width:100%}}
 </style>
 </head>
 <body>
@@ -622,26 +669,22 @@ dialog.lb::backdrop{background:rgba(0,0,0,.72)}
   </nav>
   <header class="v-hero">
     <div class="sheet mono"><span class="no">VZ</span><span class="hatch"></span><span>Visuals</span></div>
-    <h1 class="h2">Screens, components and the little interactions in between</h1>
-    <p class="sub">Everything I make in one place. Live pieces work right here, so go ahead and press, hold and type. Click a screen to see it big.</p>
+    <h1 class="h2">Visuals</h1>
+    <p class="sub">Screens, components and the little interactions in between.</p>
   </header>
-  <div class="v-bar" role="group" aria-label="Filter visuals" id="vbar"><span class="v-count mono dim" id="vcount"></span></div>
+  <div class="v-bar" role="group" aria-label="Filter visuals" id="vbar"><span class="v-count mono dim" id="vcount"></span><button class="v-sort" id="vsort" aria-label="Sort order">Recent <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button></div>
   <main class="vz" id="vz"></main>
   <footer class="bot mono"><span>© 2026 Karthik B</span><a href="index.html">← Back to the portfolio</a></footer>
 </div>
 
 <dialog class="lb" id="lb" aria-labelledby="lbT">
+  <button class="lb-x" id="lbX" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <div class="lb-in">
     <div class="lb-m" id="lbM"></div>
-    <div class="lb-c">
-      <div><b id="lbT"></b><p id="lbD"></p></div>
-      <div class="lb-nav">
-        <button class="lb-b" id="lbPrev" aria-label="Previous">←</button>
-        <button class="lb-b" id="lbNext" aria-label="Next">→</button>
-        <button class="lb-b" id="lbX" aria-label="Close">✕</button>
-      </div>
-    </div>
+    <div class="lb-c"><b id="lbT"></b><span id="lbD"></span></div>
   </div>
+  <button class="lb-b lb-prev" id="lbPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <button class="lb-b lb-next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
 </dialog>
 
 <script>
@@ -652,7 +695,7 @@ const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const root = document.documentElement;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const safe = (name, fn) => { try { fn(); } catch (e) { console.warn('[' + name + ']', e); } };
-let theme = 'dark'; try { const v = JSON.parse(localStorage.getItem('kb:theme')); if (v === 'light' || v === 'dark') theme = v; } catch (e) {}
+let theme = 'light'; try { const v = JSON.parse(localStorage.getItem('kb:theme')); if (v === 'light' || v === 'dark') theme = v; } catch (e) {}
 root.dataset.theme = theme;
 $('#themeBtn').addEventListener('click', () => { theme = root.dataset.theme === 'dark' ? 'light' : 'dark'; root.dataset.theme = theme; try { localStorage.setItem('kb:theme', JSON.stringify(theme)); } catch (e) {} });
 
@@ -704,6 +747,15 @@ const PROJECTS = [
 ];
 
 function mockHTML(p) {
+  if (p.mock === 'calorie') return `<div class="phone"><div class="isl"></div><div class="ph-top"><span class="av">${ICONS.bird}</span>ParrotPal</div>
+    <div class="ring-t"><div><div><b>1,240</b><span style="color:var(--dim)">kcal left</span></div></div></div>
+    <div class="bub" style="max-width:100%;display:flex;justify-content:space-between;gap:6px"><span>Lunch · dal, rice</span><b>640</b></div>
+    <div class="bub" style="max-width:100%;display:flex;justify-content:space-between;gap:6px"><span>Chai + biscuits</span><b>180</b></div><div class="pill-b">+ Log a meal</div></div>`;
+  if (p.mock === 'support') return `<div class="win"><div class="win-side"><div class="bar a" style="width:70%"></div><div class="bar"></div><div class="bar" style="width:80%"></div><div class="bar" style="width:60%"></div></div>
+    <div class="win-main"><div style="display:flex;justify-content:space-between;font-weight:500"><span>Components</span><span style="color:var(--dim)">v2.4</span></div>
+    <div class="kpis"><div class="kpi"><span style="color:var(--dim)">Button</span><b>12</b></div><div class="kpi"><span style="color:var(--dim)">Card</span><b>8</b></div><div class="kpi"><span style="color:var(--dim)">Modal</span><b>4</b></div></div>
+    <div class="bub" style="max-width:100%"><b>@kevin</b> card spacing feels right now</div>
+    <div><div class="trow"><span>Settings screen</span><span>Review</span><span>Today</span></div><div class="trow"><span>Empty states</span><span>Done</span><span>Mon</span></div></div></div></div>`;
   if (p.mock === 'parrot') return `<div class="phone"><div class="isl"></div><div class="ph-top"><span class="av">${ICONS.bird}</span>ParrotPal</div>
     <div class="bub">Say it with me: "Buenos días"</div><div class="bub me">Buenos días!</div><div class="bub">Nailed the accent. Next one?</div>
     <div class="wave">${[5, 9, 14, 8, 18, 12, 22, 10, 16, 7, 12, 6].map(h => `<i style="height:${h}px"></i>`).join('')}</div><div class="mic">${ICONS.mic}</div></div>`;
@@ -731,16 +783,16 @@ function mockHTML(p) {
    { type: 'video', src: 'assets/visuals/swipe.mp4', title: 'Swipe to archive', tags: ['Interactions'], ar: '4/5' }
    ============================================================ */
 const P = id => PROJECTS.find(p => p.id === id);
+PROJECTS.push({ id: 'bauhow', name: 'Bauhow', pc: '#f472b6', rgb: '244,114,182', mock: 'support' });
+P('parrotpal').mock = 'calorie';
 const VISUALS = [
-  { type: 'live', live: 'shimmer', title: 'Blur shimmer text', tags: ['Components', 'Interactions'], ar: '4/3', desc: 'Loops phrases with a soft blur.' },
-  { type: 'mock', project: 'parrotpal', title: 'ParrotPal · practice chat', tags: ['Mobile'], ar: '4/5', desc: 'The speak, listen and repeat loop.' },
-  { type: 'live', live: 'toggle', title: 'Elastic toggle', tags: ['Components', 'Interactions'], ar: '4/3', desc: 'A plan switch with a springy knob.' },
-  { type: 'mock', project: 'bizbms', title: 'BizBMS · overview dashboard', tags: ['Web'], ar: '4/3', desc: 'Revenue, orders and stock at a glance.' },
-  { type: 'live', live: 'hold', title: 'Hold to delete', tags: ['Interactions'], ar: '4/3', desc: 'A destructive action that asks for commitment, not a modal.' },
-  { type: 'mock', project: 'openyoureyes', title: 'OpenYourEyes · rest timer', tags: ['Mobile'], ar: '4/5', desc: 'A 20-second break that feels like a breath.' },
-  { type: 'live', live: 'led', title: 'Dot matrix board', tags: ['Components'], ar: '4/3', desc: 'Type anything and it scrolls in amber dots.' },
-  { type: 'mock', project: 'agent', title: 'AI Agent · live run', tags: ['Web', 'Interactions'], ar: '4/3', desc: 'The agent shows its plan and asks before risky steps.' },
-  { type: 'live', live: 'copy', title: 'Copy button', tags: ['Components', 'Interactions'], ar: '4/3', desc: 'Icon morphs into a check when it worked.' }
+  { type: 'mock', project: 'parrotpal', title: 'ParrotPal · daily log', tags: ['Mobile', 'Product'], ar: '4/5', desc: 'Calories left and logged meals at a glance.' },
+  { type: 'live', live: 'shimmer', title: 'Blur shimmer text', tags: ['Interactions'], ar: '4/3', desc: 'Loops phrases with a soft blur.' },
+  { type: 'mock', project: 'bauhow', title: 'Bauhow · component work', tags: ['SaaS', 'Product'], ar: '4/3', desc: 'Screens and components, with Kevin.' },
+  { type: 'live', live: 'toggle', title: 'Elastic toggle', tags: ['Interactions'], ar: '1/1', desc: 'A plan switch with a springy knob.' },
+  { type: 'live', live: 'led', title: 'Dot matrix board', tags: ['Interactions'], ar: '4/3', desc: 'Type anything and it scrolls in amber dots.' },
+  { type: 'live', live: 'hold', title: 'Hold to delete', tags: ['Interactions'], ar: '4/5', desc: 'A destructive action that asks for commitment, not a modal.' },
+  { type: 'live', live: 'copy', title: 'Copy button', tags: ['Interactions'], ar: '4/3', desc: 'Icon morphs into a check when it worked.' }
 ];
 
 const LIVE = {
@@ -760,17 +812,17 @@ const media = v => {
 // Build the grid
 const vz = $('#vz');
 VISUALS.forEach((v, i) => {
-  const el = document.createElement('figure'); el.className = 'vt'; el.dataset.tags = v.tags.join('|');
+  const el = document.createElement('figure'); el.className = 'vt' + (v.type === 'live' ? ' is-live' : ''); el.dataset.tags = v.tags.join('|'); el.dataset.i = i;
   const rgb = v.project ? P(v.project).rgb : '255,75,62';
-  el.innerHTML = `<div class="vt-m${v.type === 'live' ? ' vt-live' : ''}" style="--ar:${v.ar || '4/3'};--rgb:${rgb}">${media(v)}${v.type !== 'live' ? `<button class="vt-open" data-i="${i}" aria-label="Open ${v.title}"></button>` : ''}</div>
-    <figcaption class="vt-c"><b>${v.title}</b><span class="mono">${v.type === 'live' ? '<span class="live-badge">Live</span>' : v.tags[0]}</span></figcaption>`;
+  el.innerHTML = `<div class="vt-m${v.type === 'live' ? ' vt-live' : ''}" style="--ar:${v.ar || '4/3'};--rgb:${rgb}">${media(v)}${v.type !== 'live' ? `<button class="vt-open" aria-label="Open ${v.title}"></button>` : ''}</div>
+    <figcaption class="vt-c"><b>${v.title}</b></figcaption>`;
   vz.appendChild(el);
   const vid = $('video', el);
   if (vid && !reduce) { el.addEventListener('mouseenter', () => vid.play().catch(() => {})); el.addEventListener('mouseleave', () => vid.pause()); }
 });
 
 // Filters
-const FILTERS = ['All', 'Mobile', 'Web', 'Components', 'Interactions'];
+const FILTERS = ['All', 'Mobile', 'Product', 'SaaS', 'Interactions'];
 const bar = $('#vbar'), count = $('#vcount');
 FILTERS.forEach(f => {
   const n = f === 'All' ? VISUALS.length : VISUALS.filter(v => v.tags.includes(f)).length;
@@ -787,20 +839,36 @@ count.textContent = `${VISUALS.length} pieces`;
 
 // Lightbox
 const lb = $('#lb'); let cur = -1;
-const openable = () => VISUALS.map((v, i) => i).filter(i => VISUALS[i].type !== 'live' && !$$('.vt', vz)[i].hidden);
+const tiles = () => $$('.vt', vz);
+const openable = () => tiles().filter(t => !t.hidden).map(t => +t.dataset.i);
+let moved = null;
+const restore = () => { if (!moved) return; while ($('#lbM').firstChild) moved.appendChild($('#lbM').firstChild); moved = null; dispatchEvent(new Event('resize')); };
 const show = i => {
-  cur = i; const v = VISUALS[i];
-  $('#lbM').innerHTML = v.type === 'video' ? `<video src="${v.src}" controls autoplay muted loop playsinline></video>` : media(v);
+  restore(); cur = i; const v = VISUALS[i], stage = $('#lbM');
+  stage.classList.toggle('is-live', v.type === 'live');
+  if (v.type === 'live') { moved = $(`.vt[data-i="${i}"] .vt-m`, vz); stage.innerHTML = ''; while (moved.firstChild) stage.appendChild(moved.firstChild); requestAnimationFrame(() => dispatchEvent(new Event('resize'))); }
+  else stage.innerHTML = v.type === 'video' ? `<video src="${v.src}" controls autoplay muted loop playsinline></video>` : media(v);
   $('#lbT').textContent = v.title; $('#lbD').textContent = v.desc || '';
 };
-const step = d => { const list = openable(); if (!list.length) return; const k = list.indexOf(cur); show(list[(k + d + list.length) % list.length]); };
-vz.addEventListener('click', e => { const b = e.target.closest('.vt-open'); if (!b) return; show(+b.dataset.i); lb.showModal(); });
+const step = d => { const list = openable(); if (list.length < 2) return; const k = list.indexOf(cur); show(list[(k + d + list.length) % list.length]); };
+vz.addEventListener('click', e => {
+  const t = e.target.closest('.vt'); if (!t) return;
+  if (!e.target.closest('.vt-open') && e.target.closest('button,input,textarea,select,a,label,canvas,.tgl,.led-wrap')) return;
+  show(+t.dataset.i); lb.showModal();
+});
 $('#lbPrev').addEventListener('click', () => step(-1));
 $('#lbNext').addEventListener('click', () => step(1));
 $('#lbX').addEventListener('click', () => lb.close());
 lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
-lb.addEventListener('keydown', e => { if (e.key === 'ArrowRight') step(1); if (e.key === 'ArrowLeft') step(-1); });
-lb.addEventListener('close', () => { $('#lbM').innerHTML = ''; });
+lb.addEventListener('keydown', e => { if (e.target.closest('input,textarea')) return; if (e.key === 'ArrowRight') step(1); if (e.key === 'ArrowLeft') step(-1); });
+lb.addEventListener('close', () => { restore(); $('#lbM').innerHTML = ''; });
+
+// Sort: newest first (list order) or oldest first
+const sortBtn = $('#vsort'); let recent = true;
+sortBtn.addEventListener('click', () => {
+  recent = !recent; sortBtn.firstChild.textContent = recent ? 'Recent ' : 'Oldest ';
+  tiles().reverse().forEach(t => vz.appendChild(t));
+});
 
 /* ---------------- Playground ---------------- */
 safe('shimmer', () => {
