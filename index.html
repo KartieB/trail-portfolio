@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1202,8 +1202,8 @@ const ICONS = {
 };
 
 /* ---------------- Theme ---------------- */
-let theme = store.get('theme', 'dark');
-if (theme !== 'light' && theme !== 'dark') theme = 'dark';
+let theme = store.get('theme', 'light');
+if (theme !== 'light' && theme !== 'dark') theme = 'light';
 let preBlueprint = theme;
 function setTheme(t, persist = true) {
   root.dataset.theme = t;
