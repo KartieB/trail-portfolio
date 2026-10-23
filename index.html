@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* Inter Variable (rsms/inter 4, SIL OFL 1.1, see assets/fonts/Inter-LICENSE.txt) */
 @font-face{font-family:'Inter Variable';font-style:normal;font-display:swap;font-weight:100 900;src:url(assets/fonts/inter-latin-ext-opsz-normal.woff2) format('woff2-variations'),url(assets/fonts/inter-latin-ext-opsz-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
@@ -49,10 +49,17 @@ a{color:inherit}
 .l{display:block;white-space:nowrap}
 .blue{color:var(--blue);font-weight:500}
 .rows{display:flex;flex-direction:column;gap:8px}
-.chip{display:inline-flex;align-items:center;gap:5.236px;height:24px;padding:0 10.473px 0 2.618px;border-radius:999px;background:var(--chip);font-weight:500;vertical-align:top;margin:0 3px}
+.chip{display:inline-flex;align-items:center;gap:5.236px;height:24px;padding:0 10.473px 0 2.618px;border:0;border-radius:999px;background:var(--chip);font:500 16px/24px var(--sans);color:var(--ink);vertical-align:top;margin:0 3px;cursor:pointer;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.chip:focus{outline:none}.chip:focus-visible{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
+.ct{display:inline-block}
+.ct i{display:inline-block;font-style:normal;white-space:pre}
+.ct.in i{animation:chipLetter .2s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--d)}
+@keyframes chipLetter{from{opacity:0;filter:blur(3px);transform:translateY(1.5px)}to{opacity:1;filter:none;transform:none}}
+.ic img.pop{animation:chipPop .5s both}
+@keyframes chipPop{0%{opacity:.5;transform:rotate(12deg) scale(.72);animation-timing-function:cubic-bezier(.2,.8,.3,1)}38%{opacity:1;transform:rotate(4deg) scale(1.16);animation-timing-function:cubic-bezier(.4,0,.3,1)}70%{transform:rotate(14deg) scale(.97)}100%{opacity:1;transform:rotate(12deg) scale(1)}}
+@media (prefers-reduced-motion:reduce){.ct.in i,.ic img.pop{animation:none}}
 .ic{position:relative;flex:none;width:25.309px;height:24px}
 .ic img{position:absolute;left:-1.31px;top:-1.96px;width:27.927px;height:27.927px;transform:rotate(12deg);filter:drop-shadow(0 .873px 1.091px rgba(0,0,0,.12))}
-.ic .aa{position:absolute;left:-1.31px;top:-1.96px;width:27.927px;height:27.927px;transform:rotate(12deg);display:grid;place-items:center;font:600 12.65px/1 "Geist",var(--sans);color:#16a34a;padding-top:1px}
 .dot-u{text-decoration:underline dotted;text-decoration-thickness:6%;text-underline-offset:from-font;text-decoration-skip-ink:none;transition:color .15s ease-out}
 .dot-u:hover{color:var(--blue)}
 
@@ -83,6 +90,20 @@ a{color:inherit}
 .role{padding-top:2px;font-size:15px;line-height:24px;color:var(--ink-70)}
 .desc{padding-top:6px;font-size:15px;line-height:24px;color:var(--ink-60);max-width:518px}
 
+
+/* bottom navigation (Figma: Nav - Main navigation) */
+.nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(252,252,251,.68);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);box-shadow:0 0 0 1px #e2e1df,0 8px 30px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(255,255,255,.06)}
+.nav-b{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:999px;border:0;background:transparent;color:inherit;cursor:pointer;transition:background-color .15s ease-out}
+.nav-b:hover,.nav-b:focus-visible{background:rgba(30,29,27,.05)}
+.nav-b:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.nav-b:active img{transform:scale(.92)}
+.nav-b img{display:block;transition:transform .15s ease-out}
+.nav-sep{width:1px;height:18px;margin:0 2px;background:rgba(30,29,27,.16)}
+.tip{position:absolute;left:50%;bottom:54.7px;transform:translate(-50%,4px);display:flex;align-items:center;gap:5.7px;padding:3.8px 5.7px 3.8px 7.6px;border-radius:6px;background:#f7f7f6;box-shadow:0 0 0 1px #e2e1df,0 4px 8px rgba(0,0,0,.04),0 1px 1px rgba(0,0,0,.02);font:400 13.3px/19.95px "Geist",var(--sans);color:#1e1d1b;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s ease-out,transform .15s ease-out}
+.nav-b:hover .tip,.nav-b:focus-visible .tip{opacity:1;transform:translate(-50%,0)}
+.tip kbd{display:inline-grid;place-items:center;min-width:16.25px;height:17.1px;padding:0 4.75px;border-radius:4px;background:#e2e1df;border:1px solid rgba(30,29,27,.18);font:500 10.5px/1 "Geist",var(--sans);color:#767472}
+.tip span{display:flex;gap:2.85px}
+@media (hover:none){.tip{display:none}}
 @media (max-width:1100px){
   :root{--col:24px}
   .page{padding:110px 0 140px}
@@ -110,8 +131,8 @@ a{color:inherit}
   <section class="intro" aria-label="Introduction">
     <p><span class="l">I’m Karthik, a freelance <span class="blue">product designer</span> with 2+ years of shipping</span> <span class="l">products and an engineer’s eye for detail.</span></p>
     <div class="rows">
-      <p>I make <span class="chip"><span class="ic"><img src="assets/figma/chip-ios.svg" alt=""></span>iOS apps</span> feel simple, obsess over <span class="chip"><span class="ic"><img src="assets/figma/chip-type.svg" alt=""><span class="aa" aria-hidden="true">Aa</span></span>Typography</span></p>
-      <p>bring ideas to life with <span class="chip"><span class="ic"><img src="assets/figma/chip-figma.svg" alt=""></span>Figma</span></p>
+      <p>I make <button class="chip" type="button" data-group="make" aria-label="iOS apps. Click for another one."><span class="ic" aria-hidden="true"><img src="assets/chips/ios-apps.svg" alt=""></span><span class="ct">iOS apps</span></button> feel simple, obsess over <button class="chip" type="button" data-group="care" aria-label="Typography. Click for another one."><span class="ic" aria-hidden="true"><img src="assets/chips/typography.svg" alt=""></span><span class="ct">Typography</span></button></p>
+      <p>bring ideas to life with <button class="chip" type="button" data-group="tools" aria-label="Figma. Click for another one."><span class="ic" aria-hidden="true"><img src="assets/chips/figma.svg" alt=""></span><span class="ct">Figma</span></button></p>
     </div>
     <p><span class="l">Currently open for full-time and collaborations</span> <span class="l keep"><a class="dot-u" href="mailto:kartiedesigner@gmail.com?subject=Let%E2%80%99s%20book%20a%20call">Book a call</a> or DM me at <a class="dot-u" href="mailto:kartiedesigner@gmail.com">kartiedesigner@gmail.com</a></span></p>
   </section>
@@ -161,12 +182,53 @@ a{color:inherit}
     </li>
   </ol>
 </main>
+<nav class="nav" aria-label="Main navigation">
+  <a class="nav-b" href="visuals.html" aria-label="Photos (G then P)"><img src="assets/figma/nav-photos.svg" width="16" height="14.75" alt=""><span class="tip" aria-hidden="true">Photos<span><kbd>G</kbd><kbd>P</kbd></span></span></a>
+  <a class="nav-b" href="mailto:kartiedesigner@gmail.com?subject=AMA" aria-label="AMA, ask me anything (G then A)"><img src="assets/figma/nav-ama.svg" width="15" height="15" alt=""><span class="tip" aria-hidden="true">AMA<span><kbd>G</kbd><kbd>A</kbd></span></span></a>
+  <span class="nav-sep" aria-hidden="true"></span>
+  <button class="nav-b" type="button" aria-label="Preferences"><img src="assets/figma/nav-prefs.svg" width="16" height="13.5" alt=""><span class="tip" aria-hidden="true">Preferences</span></button>
+</nav>
 <script>
 (() => {
   const t = document.getElementById('time');
   const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false });
   const tick = () => { t.textContent = fmt.format(new Date()); };
   tick(); setInterval(tick, 30000);
+
+
+  // keyboard: G then P opens Photos, G then A opens AMA
+  let gAt = 0;
+  addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey || /input|textarea|select/i.test(e.target.tagName)) return;
+    const k = e.key.toLowerCase();
+    if (k === 'g') { gAt = Date.now(); return; }
+    if (Date.now() - gAt > 1200) return;
+    gAt = 0;
+    if (k === 'p') location.href = 'visuals.html';
+    else if (k === 'a') location.href = 'mailto:kartiedesigner@gmail.com?subject=AMA';
+  });
+
+  // hero chips: click to cycle; letters blur in, icon pops (matches the recording)
+  const CHIPS = {
+    make: [['iOS apps', 'ios-apps'], ['Mobile apps', 'mobile-apps'], ['B2B SaaS', 'b2b-saas'], ['AI agents', 'ai-agents'], ['Design systems', 'design-systems']],
+    care: [['Typography', 'typography'], ['Spacing', 'spacing'], ['Micro-interactions', 'micro-interactions'], ['Edge cases', 'edge-cases'], ['Motion', 'motion']],
+    tools: [['Figma', 'figma'], ['Framer', 'framer'], ['Cursor', 'cursor'], ['Claude', 'claude'], ['Codex', 'codex'], ['Paper', 'paper']]
+  };
+  Object.values(CHIPS).flat().forEach(([, f]) => { const im = new Image(); im.src = 'assets/chips/' + f + '.svg'; });
+  document.querySelectorAll('.chip[data-group]').forEach(chip => {
+    const list = CHIPS[chip.dataset.group]; let k = 0;
+    const ct = chip.querySelector('.ct'), img = chip.querySelector('.ic img');
+    chip.addEventListener('click', () => {
+      k = (k + 1) % list.length; const [label, file] = list[k];
+      const order = [...label].map((_, i) => i).sort(() => Math.random() - .5);
+      ct.classList.remove('in');
+      ct.innerHTML = [...label].map((c, i) => `<i style="--d:${order.indexOf(i) * 14}ms">${c === ' ' ? ' ' : c}</i>`).join('');
+      void ct.offsetWidth; ct.classList.add('in');
+      img.src = 'assets/chips/' + file + '.svg';
+      img.classList.remove('pop'); void img.offsetWidth; img.classList.add('pop');
+      chip.setAttribute('aria-label', label + '. Click for another one.');
+    });
+  });
 
   // project row: an endless, slow marquee; hover or hold to pause, drag to nudge
   const strip = document.getElementById('work'), row = strip.querySelector('.strip-in'), drag = strip.querySelector('.strip-drag');
