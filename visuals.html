@@ -35,6 +35,7 @@ a{color:inherit}
 .head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .head h1{font-size:16px;line-height:24px;font-weight:500}
 .head p{font-size:13px;line-height:24px;color:rgba(0,0,0,.49)}
+.filters-wrap{margin-top:4px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;padding:16px 0}
 .pill{display:inline-flex;align-items:center;height:28px;padding:0 12px;border:0;border-radius:999px;background:#efefef;font:400 16px/24px var(--sans);color:rgba(31,31,31,.6);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .15s ease-out,color .15s ease-out}
 .pill:hover{color:var(--ink)}
@@ -65,9 +66,20 @@ a{color:inherit}
 @media (hover:none){.tip{display:none}}
 
 @media (max-width:640px){
+  /* Figma: Visuals - Mobile verison (402 wide) */
+  body{background:#fff}
   .where{left:20px;right:auto}
-  .wrap{padding-top:103px}
-  .head{gap:2px 8px}
+  .wrap{width:auto;padding:103px 20px 140px}
+  .head{flex-direction:column;align-items:flex-start;gap:0}
+  .head p{white-space:nowrap}
+  .filters-wrap{position:relative;margin-right:-20px}
+  .filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-right:20px;-webkit-overflow-scrolling:touch}
+  .filters::-webkit-scrollbar{display:none}
+  .pill{flex:none}
+  .filters-wrap::after{content:"";position:absolute;right:0;top:0;width:120px;height:100%;background:linear-gradient(to left,#fff,rgba(255,255,255,0));pointer-events:none;transition:opacity .2s ease-out}
+  .filters-wrap.end::after{opacity:0}
+  .col{width:100%}
+  .card{width:100%;height:300px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -80,13 +92,13 @@ a{color:inherit}
     <h1>Visuals</h1>
     <p>Screens, components and the little interactions in between.</p>
   </header>
-  <div class="filters" role="group" aria-label="Filter visuals">
+  <div class="filters-wrap"><div class="filters" role="group" aria-label="Filter visuals">
     <button class="pill" type="button" data-f="all" aria-pressed="true">All</button>
     <button class="pill" type="button" data-f="mobile" aria-pressed="false">Mobile</button>
     <button class="pill" type="button" data-f="product" aria-pressed="false">Product</button>
     <button class="pill" type="button" data-f="saas" aria-pressed="false">SaaS</button>
     <button class="pill" type="button" data-f="interactions" aria-pressed="false">Interactions</button>
-  </div>
+  </div></div>
   <div class="grid" id="grid" aria-live="polite"></div>
   <div class="store" id="store">
     <figure class="card" data-cat="mobile product" style="--h:300px"><img src="assets/work/dailyloop-1000.webp" srcset="assets/work/dailyloop-1000.webp 1000w, assets/work/dailyloop-2000.webp 2000w" sizes="300px" width="1000" height="1000" alt="DailyLoop habit tracker app: a welcome screen and a daily to-do list screen" decoding="async"></figure>
@@ -126,6 +138,9 @@ a{color:inherit}
     c.className = 'card'; c.style.setProperty('--h', h + 'px');
     c.dataset.cat = CATS[i % CATS.length];
     c.setAttribute('aria-hidden', 'true');
+    const im = new Image(); im.alt = ''; im.loading = 'lazy'; im.decoding = 'async';
+    im.src = `https://picsum.photos/seed/kb-visual-${i + 1}/600/${h * 2}`;
+    c.appendChild(im);
     store.appendChild(c);
   });
   const cards = [...store.children];
@@ -154,6 +169,10 @@ a{color:inherit}
     layout(true);
   }));
   addEventListener('resize', () => layout(false));
+  // hide the right-edge fade once the filter row is scrolled to its end
+  const fw = document.querySelector('.filters-wrap'), fr = fw.querySelector('.filters');
+  const edge = () => fw.classList.toggle('end', fr.scrollLeft + fr.clientWidth >= fr.scrollWidth - 2);
+  fr.addEventListener('scroll', edge, { passive: true }); addEventListener('resize', edge); edge();
   layout(true);
 })();
 </script>
