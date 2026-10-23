@@ -61,8 +61,8 @@ a{color:inherit}
 .strip::-webkit-scrollbar{display:none}
 .strip-in{display:flex;gap:12px;width:max-content;padding:0 12px;margin:0 auto}
 .card{flex:none;width:500px;height:500px;border-radius:8px;background:var(--card)}
-.card.has-img{overflow:hidden;background:#fff}
-.card img{display:block;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
+.card.has-img{overflow:hidden}
+.card img{display:block;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;image-rendering:auto;user-select:none;-webkit-user-drag:none}
 
 /* work experience */
 .xp-h{margin:100px 0 0 var(--col);font:400 16px/26px var(--display);color:#282828}
@@ -115,7 +115,7 @@ a{color:inherit}
 
   <section class="strip" id="work" aria-label="Selected work">
     <div class="strip-in">
-      <div class="card"></div><div class="card"></div><figure class="card has-img"><img src="assets/work/dailyloop.webp" alt="DailyLoop habit tracker app: a welcome screen and a daily to-do list screen" width="977" height="1000" loading="eager" draggable="false"></figure><div class="card"></div><div class="card"></div>
+      <div class="card"></div><div class="card"></div><figure class="card has-img"><img src="assets/work/dailyloop-1000.webp" srcset="assets/work/dailyloop-1000.webp 977w, assets/work/dailyloop-2000.webp 1954w" sizes="(max-width:640px) 78vw, 500px" alt="DailyLoop habit tracker app: a welcome screen and a daily to-do list screen" width="977" height="1000" decoding="async" draggable="false"></figure><div class="card"></div><div class="card"></div>
     </div>
   </section>
 
